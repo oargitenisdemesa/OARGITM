@@ -2,7 +2,8 @@
   "news": [
     {"mark":"R","title":{"es":"RFETM","eu":"RFETM"},"text":{"es":"Real Federación Española de Tenis de Mesa","eu":"Espainiako Mahai Teniseko Errege Federazioa"},"url":"https://www.rfetm.es/"},
     {"mark":"F","title":{"es":"FVTM","eu":"FVTM"},"text":{"es":"Federación Vasca de Tenis de Mesa","eu":"Euskal Mahai Tenis Federazioa"},"url":"https://mahaitenis.com/es/"},
-    {"mark":"G","title":{"es":"FGTM","eu":"FGTM"},"text":{"es":"Federación Guipuzcoana de Tenis de Mesa","eu":"Gipuzkoako Mahai Tenis Federazioa"},"url":"https://gipuzkoamt.com/es/"}
+    {"mark":"G","title":{"es":"FGTM","eu":"FGTM"},"text":{"es":"Federación Guipuzcoana de Tenis de Mesa","eu":"Gipuzkoako Mahai Tenis Federazioa"},"url":"https://gipuzkoamt.com/es/"},
+    {"mark":"T","title":{"es":"Temporada 2026/2027","eu":"Denboraldia 2026/2027"},"text":{"es":"Comienza la temporada este martes día 8 de septiembre a las 17:00 h. en el polideportivo Usabal.","eu":"Denboraldia astearte honetan, irailaren 8an, hasiko da 17:00etan Usabal kiroldegian."},"url":""}
   ],
   "gallery": []
 }
