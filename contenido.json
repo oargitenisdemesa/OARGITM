@@ -1,0 +1,8 @@
+{
+  "news": [
+    {"mark":"R","title":{"es":"RFETM","eu":"RFETM"},"text":{"es":"Real Federación Española de Tenis de Mesa","eu":"Espainiako Mahai Teniseko Errege Federazioa"},"url":"https://www.rfetm.es/"},
+    {"mark":"F","title":{"es":"FVTM","eu":"FVTM"},"text":{"es":"Federación Vasca de Tenis de Mesa","eu":"Euskal Mahai Tenis Federazioa"},"url":"https://mahaitenis.com/es/"},
+    {"mark":"G","title":{"es":"FGTM","eu":"FGTM"},"text":{"es":"Federación Guipuzcoana de Tenis de Mesa","eu":"Gipuzkoako Mahai Tenis Federazioa"},"url":"https://gipuzkoamt.com/es/"}
+  ],
+  "gallery": []
+}
