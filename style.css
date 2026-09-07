@@ -13,22 +13,28 @@
 
 .photo-card{position:relative;overflow:hidden;padding:0;min-height:250px;margin:0;background:#0b315d}.photo-card img{width:100%;height:100%;min-height:250px;object-fit:cover;display:block}.photo-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(4,16,33,.8));pointer-events:none}.photo-card figcaption{position:absolute;z-index:2;left:22px;right:22px;bottom:18px;font-size:16px;font-weight:900;color:#fff}
 
-/* Galería: recuadro compacto */
-#gallery-list {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
+
+/* GALERIA - RECUADRO REALMENTE COMPACTO */
+#galeria #gallery-list {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-#gallery-list .gallery-text {
-    display: inline-flex;
-    width: auto;
-    min-height: auto;
-    padding: 8px 14px;
-    border-radius: 10px;
-    font-size: 13px;
-    line-height: 1.3;
-    font-weight: 700;
-    flex: 0 0 auto;
+#galeria #gallery-list .gallery-text {
+  display: inline-block !important;
+  width: fit-content !important;
+  max-width: fit-content !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 5px 10px !important;
+  border-radius: 7px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  flex: none !important;
+  grid-column: auto !important;
 }
-
