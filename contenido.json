@@ -11,6 +11,12 @@
       "id": "jEndurV3m4w",
       "caption": {"es":"Historia del Tenis de Mesa", "eu":"Mahai Tenisaren Historia"},
       "alt": {"es":"Video sobre la historia del tenis de mesa", "eu":"Mahai tenisaren historiaren bideoa"}
+    },
+    {
+      "type": "video",
+      "id": "yYaQHUYjLtY",
+      "caption": {"es":"Reglas Básicas de Tenis de Mesa", "eu":"Mahai Tenisaren Oinarrizko Arauak"},
+      "alt": {"es":"Video sobre las reglas básicas del tenis de mesa", "eu":"Mahai tenisaren oinarrizko arauen bideoa"}
     }
   ]
 }
