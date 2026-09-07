@@ -8,13 +8,13 @@
   "gallery": [
     {
       "type": "video",
-      "url": "https://www.youtube.com/watch?v=VIDEO_ID_1",
-      "text": {"es": "Partido destacado - set final", "eu": "Partida nabarmena - azken setea"}
+      "url": "https://youtu.be/UUZzmH-YO9U?is=kGx2Bxe572I4KrC4",
+      "text": {"es": "Historia del tenis de mesa", "eu": "Mahai-tenisaren historia"}
     },
     {
       "type": "video",
-      "url": "https://www.youtube.com/watch?v=VIDEO_ID_2",
-      "text": {"es": "Entrenamiento intensivo", "eu": "Entrenamendu intentsiboa"}
+      "url": "https://youtu.be/uAcTaNooll0?is=BoZ94-VkkdGURYnY",
+      "text": {"es": "Reglas básicas del tenis de mesa", "eu": "Mahai-teniseko oinarrizko arauak"}
     }
   ]
 }
