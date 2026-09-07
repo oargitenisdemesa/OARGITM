@@ -1,31 +1,24 @@
-# Oargi T.M. — web estática
+# Oargi Tenis de Mesa — web
 
-Web estática bilingüe (ES/EU) para Oargi T.M. No usa panel de administración, base de datos ni conexión automática con Opptimiza.
+Web bilingüe (ES/EU) para Oargi Tenis de Mesa, Tolosa.
 
-## Cómo añadir noticias
+## Incluido
+- Portada con identidad visual de tenis de mesa.
+- Escudo oficial del club.
+- Secciones de club, equipos, entrenamientos, partidos, resultados, noticias, calendario, palmarés, galería y contacto.
+- Selector ES/EU con traducción completa de los textos gestionados por la interfaz.
+- Enlace a Opptimiza.
+- Zona de administración visual preparada.
 
-Edita `contenido.json`. Cada noticia necesita `title`, `text`, y `url`. Guarda y sube el archivo a GitHub.
+## Siguiente fase técnica
+### Opptimiza
+La web no debe asumir que puede leer Opptimiza automáticamente hasta confirmar una API, feed o mecanismo de integración autorizado.
 
-## Cómo añadir imágenes
+### Google Calendar
+Hay que crear/seleccionar un calendario público del club y colocar su código de inserción en la sección de calendario.
 
-1. Sube las fotos a `assets/galeria/`.
-2. Añade cada foto al array `gallery` de `contenido.json`.
-3. Sube los cambios a GitHub.
+### Panel privado
+Para que el usuario/contraseña sea realmente privado y permita guardar cambios hace falta backend + autenticación + base de datos. Una página estática de GitHub Pages no debe guardar credenciales reales.
 
-Ejemplo:
-
-```json
-{
-  "image": "assets/galeria/foto-01.jpg",
-  "alt": {"es": "Partido de Oargi", "eu": "Oargiren partida"},
-  "caption": {"es": "Partido de liga", "eu": "Ligako partida"}
-}
-```
-
-## Calendario
-
-El PDF `calendario.pdf` se descarga desde la sección Calendario.
-
-## Opptimiza
-
-El enlace del equipo OARGI es externo y apunta a https://www.opptimiza.com/open123/.
+## Publicación
+La carpeta puede publicarse como sitio estático. Para el panel privado completo habrá que añadir un servicio backend (por ejemplo, un proveedor con autenticación y base de datos) y configurar las variables/credenciales fuera del código público.

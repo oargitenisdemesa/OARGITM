@@ -1,109 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Club Deportivo</title>
-
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body class="lang-es">
-
-  <!-- Selector de idioma -->
-  <header class="header">
-    <div class="lang-switch">
-      <button class="lang active" onclick="setLang('es')">ES</button>
-      <button class="lang" onclick="setLang('eu')">EU</button>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section id="hero" class="section">
-    <h1 class="es">Bienvenido al Club Deportivo</h1>
-    <h1 class="eu">Ongietorri Kirol Taldera</h1>
-
-    <p class="es">Compromiso, esfuerzo y pasión por el deporte.</p>
-    <p class="eu">Konpromisoa, ahalegina eta kirolarekiko pasioa.</p>
-  </section>
-
-  <!-- Intro -->
-  <section id="intro" class="section">
-    <h2 class="es">Sobre nosotros</h2>
-    <h2 class="eu">Guri buruz</h2>
-
-    <p class="es">Somos un club con historia y valores.</p>
-    <p class="eu">Historia eta balioak dituen kluba gara.</p>
-  </section>
-
-  <!-- Noticias -->
-  <section id="noticias" class="section light-blue">
-    <div class="section-head">
-      <h2 class="es">Noticias</h2>
-      <h2 class="eu">Albisteak</h2>
-    </div>
-
-    <div class="news-list">
-      <div class="news-card">
-        <h3 class="es">Victoria del fin de semana</h3>
-        <h3 class="eu">Asteburuko garaipena</h3>
-        <p class="es">Gran actuación del equipo.</p>
-        <p class="eu">Taldearen jardunaldi bikaina.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALERÍA OPCIÓN 3 -->
-  <section id="galeria" class="section light-blue">
-    <div class="section-head">
-      <h2 class="es">Galería</h2>
-      <h2 class="eu">Galeria</h2>
-      <p class="es">Vídeos y contenido multimedia del club.</p>
-      <p class="eu">Klubeko bideoak eta multimedia edukia.</p>
-    </div>
-
-    <div class="gallery-links">
-
-      <div class="gallery-item">
-        <div class="gallery-icon">🎥</div>
-        <div>
-          <span class="es">Vídeo 1: Partido de entrenamiento</span>
-          <span class="eu">Bideoa 1: Entrenamendu partida</span>
-        </div>
-        <a href="https://youtu.be/wykFTYGMK1E?is=Uq7Gle4EqdOwCYxI" target="_blank">→</a>
-      </div>
-
-      <div class="gallery-item">
-        <div class="gallery-icon">🎥</div>
-        <div>
-          <span class="es">Vídeo 2: Partido del fin de semana</span>
-          <span class="eu">Bideoa 2: Asteburuko partida</span>
-        </div>
-        <a href="https://youtu.be/uAcTaNooll0?is=W6WNF0nUPpVW7NwR" target="_blank">→</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Contacto -->
-  <section id="contacto" class="section">
-    <h2 class="es">Contacto</h2>
-    <h2 class="eu">Kontaktua</h2>
-
-    <p class="es">Escríbenos para más información.</p>
-    <p class="eu">Idatzi informazio gehiago jasotzeko.</p>
-  </section>
-
-  <!-- Script selector ES/EU -->
-  <script>
-    function setLang(lang) {
-      document.body.classList.remove('lang-es', 'lang-eu');
-      document.body.classList.add('lang-' + lang);
-
-      document.querySelectorAll('.lang').forEach(btn => btn.classList.remove('active'));
-      document.querySelector('.lang[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
-    }
-  </script>
-
-</body>
-</html>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Oargi T.M. | Tolosa</title><meta name="description" content="Oargi T.M. · Tolosa, Gipuzkoa. Pasión, competición y tenis de mesa desde los años 80."><link rel="stylesheet" href="style.css"></head><body>
+<header class="site-header"><a class="brand" href="#inicio"><img src="assets/escudo-oargi.jpg" alt="Escudo de Oargi T.M."><span>Oargi <b>T.M.</b></span></a><button class="menu-toggle" type="button" aria-expanded="false" data-i18n-attr="aria-label:menu.open">☰</button><nav><a href="#inicio" data-i18n="nav.home">Inicio</a><a href="#club" data-i18n="nav.club">El Club</a><a href="#equipos" data-i18n="nav.teams">Equipos</a><a href="#entrenamientos" data-i18n="nav.training">Entrenamientos</a><a href="#noticias" data-i18n="nav.news">Noticias</a><a href="#galeria" data-i18n="nav.gallery">Galería</a><a href="#contacto" data-i18n="nav.contact">Contacto</a><button class="lang" data-lang="es">ES</button><button class="lang" data-lang="eu">EU</button></nav></header>
+<main>
+<section id="inicio" class="hero"><div class="hero-content"><p class="eyebrow" data-i18n="eyebrow">TOLOSA · GIPUZKOA · EUSKADI</p><div class="hero-badge" data-i18n="hero.badge">TENIS DE MESA · DESDE LOS AÑOS 80</div><h1><span data-i18n="hero.siteTitle">Oargi T.M.</span></h1><p class="hero-subtitle" data-i18n="hero.text">Pasión, competición y tenis de mesa desde los años 80</p><div class="actions"><a class="btn primary" href="#equipos" data-i18n="hero.cta">Conoce nuestros equipos</a><a class="btn ghost" href="mailto:oargitenisdemesa@gmail.com" data-i18n="join">Únete al club</a></div></div><div class="hero-art" aria-hidden="true"><div class="ball"></div><div class="paddle"></div><div class="handle"></div><div class="net"></div><div class="table"><div class="table-line"></div></div></div></section>
+<section id="club" class="section intro"><div><p class="eyebrow" data-i18n="club.kicker">OARGI MENDI ELKARTEA</p><h2 data-i18n="club.title">Un club con historia y futuro</h2></div><div class="copy"><p data-i18n="club.p1">Oargi Mendi Elkartea es una asociación privada sin ánimo de lucro. Dentro de sus distintas modalidades deportivas, esta web se centra en la actividad de tenis de mesa.</p><p data-i18n="club.p2">La práctica federada comenzó en los años 80 y desde entonces el club ha participado en competiciones provinciales, autonómicas y estatales. Oargi apuesta por un deporte abierto, inclusivo y con especial impulso al deporte femenino.</p></div></section>
+<section id="equipos" class="section dark"><div class="section-head"><div><p class="eyebrow" data-i18n="teams.kicker">COMPETICIÓN</p><h2 data-i18n="teams.title">Nuestros equipos</h2></div><p data-i18n="teams.sub">Dos equipos, una misma pasión.</p></div><div class="cards"><article class="team-card"><span class="number">01</span><h3>Oargi A</h3><p data-i18n="team.open1">Open 1</p><a href="https://www.opptimiza.com/open123/" target="_blank" rel="noopener" data-i18n="team.consult">Consulta de resultados, calendario y clasificación →</a></article><article class="team-card"><span class="number">02</span><h3>Oargi B</h3><p data-i18n="team.open2">Open 2</p><a href="https://www.opptimiza.com/open123/" target="_blank" rel="noopener" data-i18n="team.consult">Consulta de resultados, calendario y clasificación →</a></article></div></section>
+<section id="entrenamientos" class="section"><div class="section-head"><div><p class="eyebrow" data-i18n="training.kicker">POLIDEPORTIVO USABAL</p><h2 data-i18n="training.title">Entrenamientos</h2></div><p data-i18n="training.sub">Entrenamos tres días a la semana en Tolosa.</p></div><div class="schedule"><div><b data-i18n="day.tue">Martes</b><span data-i18n="training.time">17:00 — 19:00</span></div><div><b data-i18n="day.wed">Miércoles</b><span data-i18n="training.time">17:00 — 19:00</span></div><div><b data-i18n="day.thu">Jueves</b><span data-i18n="training.time">17:00 — 19:00</span></div></div></section>
+<section id="noticias" class="section dark"><div class="section-head"><div><p class="eyebrow" data-i18n="news.kicker">ACTUALIDAD</p><h2 data-i18n="news.title">Noticias</h2></div><p data-i18n="news.sub">Información y novedades del club.</p></div><article class="news-placeholder"><div class="news-icon">O</div><div><h3 data-i18n="news.empty">Todavía no hay noticias publicadas.</h3><p class="small" data-i18n="news.adminNote">Las noticias podrán publicarse desde el panel privado del club y compartirse por WhatsApp o email.</p><div class="share-row"><span data-i18n="news.share">Compartir</span><a href="mailto:?subject=Oargi%20Tenis%20de%20Mesa" data-i18n="news.email">Email</a></div></div></article></section>
+<section id="calendario" class="section light-blue"><div class="section-head"><div><p class="eyebrow" data-i18n="calendar.kicker">AGENDA</p><h2 data-i18n="calendar.title">Calendario</h2></div><p data-i18n="calendar.sub">El calendario del club se publicará aquí mediante un documento PDF o Word.</p></div><div class="calendar-document"><div class="calendar-icon">📅</div><div><h3 data-i18n="calendar.docTitle">Calendario de competición</h3><p data-i18n="calendar.placeholder">Próximamente se publicará aquí el documento con el calendario del club.</p><div class="document-buttons"><span class="document-chip">PDF</span><span class="document-chip">Word</span></div></div></div></section>
+<section id="palmares" class="section palmares-section"><div class="section-head"><div><p class="eyebrow" data-i18n="palmares.kicker">HISTORIA</p><h2 data-i18n="palmares.title">Palmarés</h2></div><p data-i18n="palmares.sub">Una historia que sigue creciendo.</p></div><div class="palmares-intro"><div class="trophy-mark">🏆</div><div><span class="palmares-label" data-i18n="palmares.highlightLabel">TRAYECTORIA</span><h3 data-i18n="palmares.highlight">Más de cuatro décadas de tenis de mesa federado</h3><p data-i18n="palmares.highlightText">Un espacio para reunir títulos, ascensos, campeonatos y otros logros destacados de Oargi.</p></div></div><div class="palmares-timeline"><article class="palmares-item"><div class="palmares-year">80<span>s</span></div><div class="palmares-dot"></div><div class="palmares-card"><span class="palmares-tag" data-i18n="palmares.startTag">INICIO</span><h3 data-i18n="palmares.startTitle">Años 80</h3><p data-i18n="palmares.start">Inicio de la actividad federada de tenis de mesa.</p></div></article><article class="palmares-item"><div class="palmares-year">01</div><div class="palmares-dot"></div><div class="palmares-card"><span class="palmares-tag" data-i18n="palmares.thenTag">TRAYECTORIA</span><h3 data-i18n="palmares.thenTitle">Desde entonces</h3><p data-i18n="palmares.then">Participación en competiciones provinciales, autonómicas y estatales.</p></div></article><article class="palmares-item future"><div class="palmares-year">∞</div><div class="palmares-dot"></div><div class="palmares-card"><span class="palmares-tag" data-i18n="palmares.nextTag">FUTURO</span><h3 data-i18n="palmares.nextTitle">Próximos capítulos</h3><p data-i18n="palmares.next">Espacio preparado para incorporar títulos, ascensos y logros.</p></div></article></div><div class="palmares-note"><span>＋</span><div><strong data-i18n="palmares.addTitle">Añadiremos aquí los nuevos logros</strong><p data-i18n="palmares.addText">Año · competición · categoría · título o ascenso</p></div></div></section>
+<section id="galeria" class="section"><div class="section-head"><div><p class="eyebrow" data-i18n="gallery.kicker">OARGI</p><h2 data-i18n="gallery.title">Galería</h2></div></div><div class="gallery-grid"><div class="visual">🏓<span data-i18n="gallery.speed">Velocidad</span></div><div class="visual">🏆<span data-i18n="gallery.competition">Competición</span></div><div class="visual">🎯<span data-i18n="gallery.training">Entrenamiento</span></div></div><p class="small" data-i18n="gallery.empty">La galería del club se podrá gestionar desde el panel de administración.</p></section>
+<section id="contacto" class="section contact"><div><p class="eyebrow" data-i18n="contact.kicker">ENCUÉNTRANOS</p><h2 data-i18n="contact.title">Ven a conocernos</h2><p data-i18n="contact.address">Polideportivo Usabal<br>Usabal Auzoa, 25<br>20400 Usabal, Gipuzkoa</p><a class="btn blue" href="https://www.google.com/maps/search/?api=1&query=Polideportivo+Usabal%2C+Usabal+Auzoa%2C+25%2C+20400+Usabal%2C+Gipuzkoa" target="_blank" rel="noopener" data-i18n="directions">Cómo llegar</a></div><div class="contact-card"><span data-i18n="email">EMAIL</span><a href="mailto:oargitenisdemesa@gmail.com">oargitenisdemesa@gmail.com</a><span data-i18n="contact.mail">Escríbenos</span><a href="mailto:oargitenisdemesa@gmail.com" data-i18n="contact.cta">Contactar con Oargi</a></div></section>
+</main><footer><img src="assets/escudo-oargi.jpg" alt=""><span data-i18n="footer">© Oargi Tenis de Mesa · Tolosa, Gipuzkoa</span><a href="admin.html" data-i18n="footer.admin">Administración</a></footer><script src="script.js"></script></body></html>
