@@ -3,7 +3,24 @@
 gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:15px}.
 gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:15px}.
 
-visual{min-height:250px;border-radius:20px;padding:25px;background:linear-gradient(135deg,#0b65c9,#8bc9ff);color:white;font-size:70px;display:flex;flex-direction:column;justify-content:flex-end}.
+.visual {
+  min-height: 83px;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: transparent; /* Elimina el fondo azul */
+  border: 1px solid var(--line); /* Añade un borde fino opcional */
+  color: var(--ink); /* Cambia el texto a oscuro para que sea legible */
+  font-size: 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Elimina los fondos azules específicos de cada tarjeta */
+.visual:nth-child(2),
+.visual:nth-child(3) {
+  background: transparent;
+}
 
 visual:nth-child(2){background:linear-gradient(135deg,#08203e,#287fe0)}.visual:nth-child(3){background:linear-gradient(135deg,#14519a,#6cb5ff)}.visual span{font-size:16px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.contact{background:#f7fbff;display:grid;grid-template-columns:1.5fr 1fr;gap:40px}.contact-card{align-self:center;background:var(--navy);color:#fff;padding:35px;border-radius:var(--radius)}.contact-card span{font-size:11px;letter-spacing:.16em;color:#72b6ff;font-weight:900}.contact-card a{display:block;font-size:20px;margin-top:8px;color:#fff}footer{background:#041021;color:#9db0c7;padding:25px clamp(22px,7vw,100px);display:flex;align-items:center;gap:15px}footer img{width:40px;height:40px;border-radius:9px;object-fit:cover}footer a{margin-left:auto;color:#6fb7ff;font-weight:700}@media(max-width:900px){nav{display:none}.menu-toggle{display:block}.site-header.nav-open nav{position:absolute;top:78px;left:0;right:0;background:white;display:flex;flex-wrap:wrap;padding:18px;box-shadow:0 20px 30px rgba(0,0,0,.08)}.hero{min-height:720px}.hero-art{opacity:.45;width:90vw}.intro,.contact{grid-template-columns:1fr}.cards,.results-placeholder{grid-template-columns:1fr}.schedule{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr}.timeline div{grid-template-columns:1fr;gap:5px}}@media(max-width:520px){.hero h1{font-size:46px}.section{padding-top:70px;padding-bottom:70px}.section-head{display:block}.section-head>p{margin-top:15px}footer{flex-wrap:wrap}footer a{margin-left:0;width:100%}}
 
