@@ -54,3 +54,18 @@
   font-size: 16px;
   font-weight: 600;
 }
+/* Oculta por defecto ambos idiomas */
+.lang-es,
+.lang-eu {
+  display: none;
+}
+
+/* Muestra el texto en español cuando la etiqueta html tiene lang="es" */
+html[lang="es"] .lang-es {
+  display: inline;
+}
+
+/* Muestra el texto en euskera cuando la etiqueta html tiene lang="eu" */
+html[lang="eu"] .lang-eu {
+  display: inline;
+}
