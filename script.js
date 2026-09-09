@@ -1,15 +1,17 @@
-const translations = {
-  es: {
-    'nav.home':'Inicio','nav.club':'El Club','nav.teams':'Equipos','nav.training':'Entrenamientos','nav.news':'Noticias','nav.gallery':'Galería','nav.contact':'Contacto',
-    'menu.open':'Abrir menú','hero.siteTitle':'Oargi T.M.','eyebrow':'TOLOSA · GIPUZKOA · EUSKADI','hero.title1':'Pasión, competición','hero.title2':'y tenis de mesa desde los años 80','hero.text':'Pasión, competición y tenis de mesa desde los años 80','hero.cta':'Conoce nuestros equipos','join':'Únete al club','hero.badge':'TENIS DE MESA · DESDE LOS AÑOS 80',
-    'club.kicker':'OARGI MENDI ELKARTEA','club.title':'Un club con historia y futuro','club.p1':'Oargi Mendi Elkartea es una asociación privada sin ánimo de lucro. Dentro de sus distintas modalidades deportivas, esta web se centra en la actividad de tenis de mesa.','club.p2':'La práctica federada comenzó en los años 80 y desde entonces el club ha participado en competiciones provinciales, autonómicas y estatales. Oargi apuesta por un deporte abierto, inclusivo y con especial impulso al deporte femenino.',
-    'teams.kicker':'COMPETICIÓN','teams.title':'Nuestros equipos','teams.sub':'Dos equipos, una misma pasión.','team.open1':'Open 1','team.open2':'Open 2','team.consult':'Consulta de resultados, calendario y clasificación →',
-    'training.kicker':'POLIDEPORTIVO USABAL','training.title':'Entrenamientos','training.sub':'Entrenamos tres días a la semana en Tolosa.','day.tue':'Martes','day.wed':'Miércoles','day.thu':'Jueves','training.time':'17:00 — 19:00',
-    'news.kicker':'ACTUALIDAD','news.title':'Noticias','news.sub':'Información y novedades del club.','news.readMore':'Visitar web →','news.rfetmText':'Real Federación Española de Tenis de Mesa','news.fvtmText':'Federación Vasca de Tenis de Mesa','news.fgtmText':'Federación Guipuzcoana de Tenis de Mesa',
-
-    'calendar.kicker':'AGENDA','calendar.title':'Calendario','calendar.sub':'El calendario del club se publicará aquí mediante un documento PDF o Word.','calendar.docTitle':'Calendario de competición','calendar.placeholder':'Aqui se publica el documento que recoge el calendario en el que toma parte el club.',
+'gallery.kicker': 'MULTIMEDIA',
+'gallery.title': 'Galería',
+'gallery.subtitle': 'Imágenes, vídeos y contenido multimedia del club.',
+'gallery.video1.title': 'Historia del Tenis de mesa',
+'gallery.video2.title': 'Reglas básicas de Tenis de Mesa',
+':'Calendario','calendar.sub':'El calendario del club se publicará aquí mediante un documento PDF o Word.','calendar.docTitle':'Calendario de competición','calendar.placeholder':'Aqui se publica el documento que recoge el calendario en el que toma parte el club.',
     'palmares.kicker':'HISTORIA','palmares.title':'Palmarés','palmares.sub':'Una historia que sigue creciendo.','palmares.highlightLabel':'TRAYECTORIA','palmares.highlight':'Más de cuatro décadas de tenis de mesa federado','palmares.highlightText':'Un espacio para reunir títulos, ascensos, campeonatos y otros logros destacados de Oargi.','palmares.startTag':'INICIO','palmares.startTitle':'Años 80','palmares.start':'Inicio de la actividad federada de tenis de mesa.','palmares.thenTag':'TRAYECTORIA','palmares.thenTitle':'Desde entonces','palmares.then':'Participación en competiciones provinciales, autonómicas y estatales.','palmares.nextTag':'FUTURO','palmares.nextTitle':'Próximos capítulos','palmares.next':'Espacio preparado para incorporar títulos, ascensos y logros.','palmares.addTitle':'Añadiremos aquí los nuevos logros','palmares.addText':'Año · competición · categoría · título o ascenso',
-    'gallery.kicker':'OARGI','gallery.title':'Galería','gallery.speed':'Velocidad','gallery.competition':'Competición','gallery.training':'Entrenamiento','gallery.empty':'La galería del club se podrá gestionar desde el panel de administración.',
+
+    'gallery.kicker': 'MULTIMEDIA',
+'gallery.title': 'Galería',
+'gallery.subtitle': 'Imágenes, vídeos y contenido multimedia del club.',
+'gallery.video1.title': 'Historia del Tenis de mesa',
+'gallery.video2.title': 'Reglas básicas de Tenis de Mesa',
+
     'contact.kicker':'ENCUÉNTRANOS','contact.title':'Ven a conocernos','contact.address':'Polideportivo Usabal<br>Usabal Auzoa, 25<br>20400 Usabal, Gipuzkoa','directions':'Cómo llegar','email':'EMAIL','contact.mail':'Escríbenos','contact.cta':'Contactar con Oargi',
     'footer.admin':'Administración','footer':'© Oargi T.M. · Tolosa, Gipuzkoa'
   },
@@ -23,7 +25,12 @@ const translations = {
 
     'calendar.kicker':'AGENDA','calendar.title':'Egutegia','calendar.sub':'Klubaren egutegia PDF edo Word dokumentu baten bidez argitaratuko da hemen.','calendar.docTitle':'Lehiaketako egutegia','calendar.placeholder':'Klubak parte hartzen duen egutegia jasotzen duen dokumentua argitaratzen da hemen.',
     'palmares.kicker':'HISTORIA','palmares.title':'Palmaresa','palmares.sub':'Hazten jarraitzen duen historia.','palmares.highlightLabel':'IBILBIDEA','palmares.highlight':'Federatutako mahai-teniseko lau hamarkada baino gehiago','palmares.highlightText':'Oargiren tituluak, igoerak, txapelketak eta beste lorpen aipagarri batzuk biltzeko gunea.','palmares.startTag':'HASIERA','palmares.startTitle':'80ko hamarkada','palmares.start':'Mahai-teniseko federatutako jardueraren hasiera.','palmares.thenTag':'IBILBIDEA','palmares.thenTitle':'Ordutik','palmares.then':'Lurraldeko, autonomia erkidegoko eta estatuko txapelketetan parte hartzea.','palmares.nextTag':'ETORKIZUNA','palmares.nextTitle':'Hurrengo kapituluak','palmares.next':'Atal hau prest dago tituluak, igoerak eta lorpenak gehitzeko.','palmares.addTitle':'Hemen gehituko ditugu lorpen berriak','palmares.addText':'Urtea · txapelketa · kategoria · titulua edo igoera',
-    'gallery.kicker':'OARGI','gallery.title':'Galeria','gallery.speed':'Abiadura','gallery.competition':'Lehiaketa','gallery.training':'Entrenamendua','gallery.empty':'Klubaren galeria administrazio-panelaren bidez kudeatu ahal izango da.',
+    'gallery.kicker': 'MULTIMEDIA',
+'gallery.title': 'Galeria',
+'gallery.subtitle': 'Klubeko irudiak, bideoak eta multimedia edukia.',
+'gallery.video1.title': '1. Mahai-tenisaren historia',
+'gallery.video2.title': 'Mahai-teniseko oinarrizko arauak',
+
     'contact.kicker':'AURKITU GAITZAZU','contact.title':'Ezagutu gaitzazu','contact.address':'Usabal Kiroldegia<br>Usabal Auzoa, 25<br>20400 Usabal, Gipuzkoa','directions':'Nola iritsi','email':'POSTA ELEKTRONIKOA','contact.mail':'Idatzi','contact.cta':'Jarri harremanetan Oargirekin',
     'footer.admin':'Administrazioa','footer':'© Oargi T.M. · Tolosa, Gipuzkoa'
   }
