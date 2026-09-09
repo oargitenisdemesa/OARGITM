@@ -31,6 +31,10 @@ const translations = {
 function applyLang(lang){
   const dict=translations[lang]||translations.es;
   document.documentElement.lang=lang;
+  // 🔥 Añadido: activar ES/EU para la Galería
+  document.body.classList.remove('lang-es', 'lang-eu');
+  document.body.classList.add('lang-' + lang);
+  
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(dict[k]!==undefined)el.innerHTML=dict[k]});
   document.querySelectorAll('[data-i18n-attr]').forEach(el=>{const parts=el.dataset.i18nAttr.split(':');const attr=parts.shift();const k=parts.join(':');if(dict[k]!==undefined)el.setAttribute(attr,dict[k])});
   document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
