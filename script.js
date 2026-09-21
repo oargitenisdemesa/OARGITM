@@ -135,7 +135,7 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
   function fmtDate(d){
     if(!d) return '';
     const lang=document.documentElement.lang==='eu'?'eu-ES':'es-ES';
-    return d.toLocaleDateString(lang,{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+    return d.toLocaleDateString(lang,{weekday:'short',day:'numeric',month:'short'});
   }
   window.renderResults=function(){
     if(failed){list.innerHTML='<p class="res-msg">'+esc(t('results.error'))+'</p>';summary.innerHTML='';return;}
