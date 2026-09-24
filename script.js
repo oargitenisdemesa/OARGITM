@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 /* ===== Resultados (Google Sheets publicado como CSV) ===== */
-const RESULTS_SHEET_ID='1VZNejkg7ZLzpaAL9eHaBqIQjhNFa3ASOd29RKqBYaSc';
+const RESULTS_SHEET_ID='1l-Ge3thnnQe6ya9r3L_Wx_MPff5pRWzvWbVEksq-T2o';
 const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
 (function(){
   const list=document.getElementById('res-list');
