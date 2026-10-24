@@ -186,6 +186,7 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
    - Enlace: dirección de Google Fotos (https://...).
    Los enlaces que ya estén escritos en index.html no se duplican. */
 const PHOTOS_SHEET_TAB='Fotos';
+const PHOTOS_SHEET_GID='768932843'; // opcional: número que sale tras "gid=" en la dirección de la pestaña; si se rellena, tiene prioridad sobre el nombre
 (function(){
   const box=document.getElementById('gallery-photos');
   if(!box) return;
@@ -236,7 +237,7 @@ const PHOTOS_SHEET_TAB='Fotos';
   const base='https://docs.google.com/spreadsheets/d/'+RESULTS_SHEET_ID;
   (async function(){
     try{
-      const r=await fetch(base+'/gviz/tq?tqx=out:csv&sheet='+encodeURIComponent(PHOTOS_SHEET_TAB)+'&_='+Date.now());
+      const r=await fetch(base+'/gviz/tq?tqx=out:csv&'+(PHOTOS_SHEET_GID?'gid='+encodeURIComponent(PHOTOS_SHEET_GID):'sheet='+encodeURIComponent(PHOTOS_SHEET_TAB))+'&_='+Date.now());
       if(!r.ok) return;
       addPhotos(parseCSV(await r.text()));
     }catch(e){}
