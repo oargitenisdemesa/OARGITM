@@ -178,3 +178,67 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     failed=true; window.renderResults();
   })();
 })();
+
+/* ===== Galería de fotos (pestaña "Fotos" de la misma hoja de Google Sheets) =====
+   Columnas de la pestaña: Competición | Partido | Enlace
+   - Competición: "Open 1", "Open 2" o el título de otro grupo (se crea si no existe).
+   - Partido: texto que se verá como enlace.
+   - Enlace: dirección de Google Fotos (https://...).
+   Los enlaces que ya estén escritos en index.html no se duplican. */
+const PHOTOS_SHEET_TAB='Fotos';
+(function(){
+  const box=document.getElementById('gallery-photos');
+  if(!box) return;
+  const norm=v=>String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();
+  function parseCSV(text){
+    const rows=[];let row=[],cur='',q=false;
+    for(let i=0;i<text.length;i++){
+      const c=text[i];
+      if(q){ if(c==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=c; }
+      else if(c==='"') q=true;
+      else if(c===','){row.push(cur);cur='';}
+      else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n')i++; row.push(cur);cur='';rows.push(row);row=[]; }
+      else cur+=c;
+    }
+    if(cur!==''||row.length){row.push(cur);rows.push(row);}
+    return rows.filter(r=>r.some(c=>String(c).trim()!==''));
+  }
+  const idx=(h,re)=>h.findIndex(x=>re.test(x));
+  function addPhotos(rows){
+    if(rows.length<2) return;
+    const h=rows[0].map(norm);
+    const iC=idx(h,/^competicion|^grupo|^seccion/), iP=idx(h,/^partido|^titulo|^nombre|^texto/), iL=idx(h,/^enlace|^link|^url/);
+    /* si la pestaña no existe, Google devuelve otra hoja: sin columna "Enlace" se ignora */
+    if(iL<0||iP<0||iC<0) return;
+    rows.slice(1).forEach(r=>{
+      const comp=(r[iC]||'').trim(), name=(r[iP]||'').trim(), url=(r[iL]||'').trim();
+      if(!comp||!name||!/^https?:\/\//i.test(url)) return;
+      let item=[...box.querySelectorAll('.media-item')].find(li=>{
+        const lab=li.querySelector('.media-item-label');
+        return lab&&norm(lab.textContent)===norm(comp);
+      });
+      if(!item){
+        item=document.createElement('li');
+        item.className='media-item multi';
+        const icon=document.createElement('span');icon.className='media-icon';icon.textContent='🖼';
+        const body=document.createElement('div');body.className='media-item-body';
+        const lab=document.createElement('span');lab.className='media-item-label';lab.textContent=comp;
+        const subs=document.createElement('div');subs.className='media-sublinks';
+        body.append(lab,subs);item.append(icon,body);box.appendChild(item);
+      }
+      const subs=item.querySelector('.media-sublinks');
+      if(!subs||[...subs.querySelectorAll('a')].some(a=>a.href===url||a.getAttribute('href')===url)) return;
+      const a=document.createElement('a');
+      a.href=url;a.target='_blank';a.rel='noopener';a.textContent=name;
+      subs.appendChild(a);
+    });
+  }
+  const base='https://docs.google.com/spreadsheets/d/'+RESULTS_SHEET_ID;
+  (async function(){
+    try{
+      const r=await fetch(base+'/gviz/tq?tqx=out:csv&sheet='+encodeURIComponent(PHOTOS_SHEET_TAB)+'&_='+Date.now());
+      if(!r.ok) return;
+      addPhotos(parseCSV(await r.text()));
+    }catch(e){}
+  })();
+})();
