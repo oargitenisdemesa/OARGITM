@@ -207,7 +207,7 @@ const PHOTOS_SHEET_TAB='Fotos';
   function addPhotos(rows){
     if(rows.length<2) return;
     const h=rows[0].map(norm);
-    const iC=idx(h,/^competicion|^grupo|^seccion/), iP=idx(h,/^partido|^titulo|^nombre|^texto/), iL=idx(h,/^enlace|^link|^url/);
+    const iC=idx(h,/^compet|^grupo|^seccion|^open/), iP=idx(h,/^partido|^titulo|^nombre|^texto/), iL=idx(h,/^enlace|^link|^url/);
     /* si la pestaña no existe, Google devuelve otra hoja: sin columna "Enlace" se ignora */
     if(iL<0||iP<0||iC<0) return;
     rows.slice(1).forEach(r=>{
