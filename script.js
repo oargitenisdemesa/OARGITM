@@ -71,7 +71,7 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
   if(!list) return;
   const summary=document.getElementById('res-summary');
   const filters=document.querySelectorAll('.res-filter');
-  let matches=null, failed=false, team='all';
+  let matches=null, sections={}, failed=false, team='all';
 
   const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -105,7 +105,7 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     return m?m[1].padStart(2,'0')+':'+m[2]:'';
   }
   function toMatches(rows){
-    if(rows.length<2) return [];
+    if(rows.length<2) return {matches:[],sections:{}};
     const h=rows[0].map(norm);
     const ix={
       team:col(h,[/^equipo/]), liga:col(h,[/^liga/]), round:col(h,[/^jornada/]), date:col(h,[/^fecha/]), time:col(h,[/^hora/]),
@@ -113,10 +113,14 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
       hs:col(h,[/(puntos|sets|tantos).*local/,/local.*(puntos|sets|tantos)/]),
       as:col(h,[/(puntos|sets|tantos).*visitante/,/visitante.*(puntos|sets|tantos)/])
     };
-    if(ix.home<0||ix.away<0) return [];
-    const out=[];
+    if(ix.home<0||ix.away<0) return {matches:[],sections:{}};
+    const out=[], sections={};
+    let section=0;
     rows.slice(1).forEach(r=>{
       const home=(r[ix.home]||'').trim(), away=(r[ix.away]||'').trim();
+      const first=((ix.team>=0?r[ix.team]:r[0])||'').trim();
+      /* fila de cabecera: "PRIMERA VUELTA", "SEGUNDA VUELTA"... (sin rivales) */
+      if(!home&&!away&&/vuelta/i.test(first)){ section++; sections[section]=first; return; }
       if(!home||!away) return;
       const num=i=>{const v=i>=0?String(r[i]||'').trim():'';return v!==''&&!isNaN(v)?Number(v):null;};
       const hs=num(ix.hs), as=num(ix.as);
@@ -126,11 +130,11 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
       if(hs!==null&&as!==null){
         status=hs===as?'draw':((hs>as)===oargiHome?'win':'loss');
       }
-      out.push({team,liga:ix.liga>=0?(r[ix.liga]||'').trim():'',round:ix.round>=0?(r[ix.round]||'').trim():'',
+      out.push({section,team,liga:ix.liga>=0?(r[ix.liga]||'').trim():'',round:ix.round>=0?(r[ix.round]||'').trim():'',
         date:parseDate(ix.date>=0?r[ix.date]:''),time:parseTime(ix.time>=0?r[ix.time]:''),home,away,hs,as,status});
     });
-    out.sort((a,b)=>((a.date||0)-(b.date||0))||a.time.localeCompare(b.time));
-    return out;
+    out.sort((a,b)=>(a.section-b.section)||((a.date||0)-(b.date||0))||a.time.localeCompare(b.time));
+    return {matches:out,sections};
   }
   function fmtDate(d){
     if(!d) return '';
@@ -146,16 +150,22 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     summary.innerHTML=[['results.played',c.played],['results.won',c.win],['results.drawn',c.draw],['results.lost',c.loss]]
       .map(x=>'<div><b>'+x[1]+'</b><span>'+esc(t(x[0]))+'</span></div>').join('');
     if(!shown.length){list.innerHTML='<p class="res-msg">'+esc(t('results.empty'))+'</p>';return;}
-    list.innerHTML=shown.map(m=>{
+    let html='', lastSection=-1;
+    shown.forEach(m=>{
+      if(m.section!==lastSection){
+        if(sections[m.section]) html+='<h3 class="res-section" style="margin:1.4rem 0 .6rem;font-size:1.1rem;letter-spacing:.08em">'+esc(sections[m.section])+'</h3>';
+        lastSection=m.section;
+      }
       const score=m.status==='pending'?'– : –':m.hs+' – '+m.as;
       const hw=m.status!=='pending'&&m.hs>m.as, aw=m.status!=='pending'&&m.as>m.hs;
       const meta=[fmtDate(m.date),m.time].filter(Boolean).join(' · ');
       const rnd=m.round?t('results.round')+' '+m.round.replace(/^J/i,''):'';
-      return '<article class="res-card res-'+m.status+'">'
+      html+='<article class="res-card res-'+m.status+'">'
         +'<div class="res-meta"><span class="res-team">'+esc(m.team)+'</span><span>'+esc([rnd,meta].filter(Boolean).join(' · '))+'</span></div>'
         +'<div class="res-match"><span class="res-home'+(hw?' won':'')+'">'+esc(m.home)+'</span><span class="res-score">'+esc(score)+'</span><span class="res-away'+(aw?' won':'')+'">'+esc(m.away)+'</span></div>'
         +'<span class="res-badge">'+esc(t('results.'+m.status))+'</span></article>';
-    }).join('');
+    });
+    list.innerHTML=html;
   };
   filters.forEach(b=>b.addEventListener('click',()=>{
     team=b.dataset.team;
@@ -171,7 +181,8 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
       try{
         const r=await fetch(u+'&_='+Date.now());
         if(!r.ok) continue;
-        matches=toMatches(parseCSV(await r.text()));
+        const res=toMatches(parseCSV(await r.text()));
+        matches=res.matches; sections=res.sections;
         failed=false; window.renderResults(); return;
       }catch(e){}
     }
