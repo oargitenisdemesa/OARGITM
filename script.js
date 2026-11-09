@@ -135,7 +135,9 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
       out.push({section,team,liga:ix.liga>=0?(r[ix.liga]||'').trim():'',round:ix.round>=0?(r[ix.round]||'').trim():'',
         date:parseDate(ix.date>=0?r[ix.date]:''),time:parseTime(ix.time>=0?r[ix.time]:''),home,away,hs,as,status});
     });
-    out.sort((a,b)=>(a.section-b.section)||((a.date||0)-(b.date||0))||a.time.localeCompare(b.time));
+    /* dentro de cada vuelta: primero por fecha; los partidos sin fecha van al final de su vuelta */
+    const dt=d=>d?d.getTime():Infinity;
+    out.sort((a,b)=>(a.section-b.section)||(dt(a.date)>dt(b.date)?1:dt(a.date)<dt(b.date)?-1:0)||a.time.localeCompare(b.time));
     return {matches:out,sections};
   }
   function fmtDate(d){
