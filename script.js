@@ -149,21 +149,27 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     shown.forEach(m=>{if(m.status!=='pending'){c.played++;c[m.status]++;}});
     summary.innerHTML=[['results.played',c.played],['results.won',c.win],['results.drawn',c.draw],['results.lost',c.loss]]
       .map(x=>'<div><b>'+x[1]+'</b><span>'+esc(t(x[0]))+'</span></div>').join('');
-    if(!shown.length){list.innerHTML='<p class="res-msg">'+esc(t('results.empty'))+'</p>';return;}
-    let html='', lastSection=-1;
-    shown.forEach(m=>{
-      if(m.section!==lastSection){
-        if(sections[m.section]) html+='<h3 class="res-section" style="margin:1.4rem 0 .6rem;font-size:1.1rem;letter-spacing:.08em">'+esc(sections[m.section])+'</h3>';
-        lastSection=m.section;
-      }
-      const score=m.status==='pending'?'– : –':m.hs+' – '+m.as;
-      const hw=m.status!=='pending'&&m.hs>m.as, aw=m.status!=='pending'&&m.as>m.hs;
-      const meta=[fmtDate(m.date),m.time].filter(Boolean).join(' · ');
-      const rnd=m.round?t('results.round')+' '+m.round.replace(/^J/i,''):'';
-      html+='<article class="res-card res-'+m.status+'">'
-        +'<div class="res-meta"><span class="res-team">'+esc(m.team)+'</span><span>'+esc([rnd,meta].filter(Boolean).join(' · '))+'</span></div>'
-        +'<div class="res-match"><span class="res-home'+(hw?' won':'')+'">'+esc(m.home)+'</span><span class="res-score">'+esc(score)+'</span><span class="res-away'+(aw?' won':'')+'">'+esc(m.away)+'</span></div>'
-        +'<span class="res-badge">'+esc(t('results.'+m.status))+'</span></article>';
+    /* Todas las vueltas de la hoja se muestran en orden (PRIMERA arriba, SEGUNDA abajo),
+       aunque todavía no tengan partidos: así la cabecera queda preparada. */
+    const groups={};
+    shown.forEach(m=>{(groups[m.section]=groups[m.section]||[]).push(m);});
+    const allSecs=[...new Set([...Object.keys(sections),...Object.keys(groups)].map(Number))].sort((a,b)=>a-b);
+    if(!allSecs.length){list.innerHTML='<p class="res-msg">'+esc(t('results.empty'))+'</p>';return;}
+    let html='';
+    allSecs.forEach(s=>{
+      if(sections[s]) html+='<h3 class="res-section" style="margin:1.4rem 0 .6rem;font-size:1.1rem;letter-spacing:.08em">'+esc(sections[s])+'</h3>';
+      const items=groups[s]||[];
+      if(!items.length){html+='<p class="res-msg" style="margin:0 0 .6rem">'+esc(t('results.empty'))+'</p>';return;}
+      items.forEach(m=>{
+        const score=m.status==='pending'?'– : –':m.hs+' – '+m.as;
+        const hw=m.status!=='pending'&&m.hs>m.as, aw=m.status!=='pending'&&m.as>m.hs;
+        const meta=[fmtDate(m.date),m.time].filter(Boolean).join(' · ');
+        const rnd=m.round?t('results.round')+' '+m.round.replace(/^J/i,''):'';
+        html+='<article class="res-card res-'+m.status+'">'
+          +'<div class="res-meta"><span class="res-team">'+esc(m.team)+'</span><span>'+esc([rnd,meta].filter(Boolean).join(' · '))+'</span></div>'
+          +'<div class="res-match"><span class="res-home'+(hw?' won':'')+'">'+esc(m.home)+'</span><span class="res-score">'+esc(score)+'</span><span class="res-away'+(aw?' won':'')+'">'+esc(m.away)+'</span></div>'
+          +'<span class="res-badge">'+esc(t('results.'+m.status))+'</span></article>';
+      });
     });
     list.innerHTML=html;
   };
