@@ -118,14 +118,16 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     let section=0;
     rows.slice(1).forEach(r=>{
       const home=(r[ix.home]||'').trim(), away=(r[ix.away]||'').trim();
-      const first=((ix.team>=0?r[ix.team]:r[0])||'').trim();
-      /* fila de cabecera: "PRIMERA VUELTA", "SEGUNDA VUELTA"... (sin rivales) */
-      if(!home&&!away&&/vuelta/i.test(first)){ section++; sections[section]=first; return; }
+      /* "PRIMERA VUELTA" / "SEGUNDA VUELTA" puede estar en su propia fila o en la misma que un partido */
+      const vueltaRe=/(PRIMERA|SEGUNDA)\s+VUELTA/i;
+      const rowVuelta=r.map(c=>String(c||'')).join(' ').match(vueltaRe);
+      if(rowVuelta){ section++; sections[section]=rowVuelta[0].toUpperCase(); }
       if(!home||!away) return;
       const num=i=>{const v=i>=0?String(r[i]||'').trim():'';return v!==''&&!isNaN(v)?Number(v):null;};
       const hs=num(ix.hs), as=num(ix.as);
       const oargiHome=norm(home).startsWith('oargi');
-      const team=((ix.team>=0&&r[ix.team])||'').trim()||(oargiHome?home:away);
+      const rawTeam=(ix.team>=0&&r[ix.team])?String(r[ix.team]).trim():'';
+      const team=(rawTeam&&!/VUELTA/i.test(rawTeam)?rawTeam:'')||(oargiHome?home:away);
       let status='pending';
       if(hs!==null&&as!==null){
         status=hs===as?'draw':((hs>as)===oargiHome?'win':'loss');
