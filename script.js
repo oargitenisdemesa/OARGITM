@@ -73,7 +73,7 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
   const filters=document.querySelectorAll('.res-filter');
   let matches=null, sections={}, failed=false, team='all';
 
-  const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const norm=v=>String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();
   const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const t=k=>{const d=translations[document.documentElement.lang]||translations.es;return d[k]||translations.es[k]||k};
 
@@ -105,8 +105,12 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     return m?m[1].padStart(2,'0')+':'+m[2]:'';
   }
   function toMatches(rows){
-    if(rows.length<2) return {matches:[],sections:{}};
-    const h=rows[0].map(norm);
+    // Limpia espacios raros (no separables, invisibles) para que la detección sea fiable
+    const clean=s=>String(s==null?'':s).replace(/[ ​-‍﻿]/g,' ').replace(/\s+/g,' ').trim();
+    // Busca la fila de cabecera (la que empieza por "Equipo"), aunque no sea la primera
+    const hi=rows.findIndex(r=>norm(clean(r[0])).startsWith('equipo'));
+    if(hi<0) return {matches:[],sections:{}};
+    const h=rows[hi].map(c=>norm(clean(c)));
     const ix={
       team:col(h,[/^equipo/]), liga:col(h,[/^liga/]), round:col(h,[/^jornada/]), date:col(h,[/^fecha/]), time:col(h,[/^hora/]),
       home:col(h,[/^local$/,/^local/]), away:col(h,[/^visitante/]),
@@ -116,26 +120,26 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     if(ix.home<0||ix.away<0) return {matches:[],sections:{}};
     const out=[], sections={};
     let section=0;
-    rows.slice(1).forEach(r=>{
-      const home=(r[ix.home]||'').trim(), away=(r[ix.away]||'').trim();
-      /* "PRIMERA VUELTA" / "SEGUNDA VUELTA" puede estar en su propia fila o en la misma que un partido */
-      const vueltaRe=/(PRIMERA|SEGUNDA)\s+VUELTA/i;
-      const rowVuelta=r.map(c=>String(c||'')).join(' ').match(vueltaRe);
-      if(rowVuelta){ section++; sections[section]=rowVuelta[0].toUpperCase(); }
+    rows.slice(hi+1).forEach(r=>{
+      // Detección de PRIMERA/SEGUNDA VUELTA en cualquier celda de la fila
+      const rowText=clean(r.join(' ')).toUpperCase();
+      const vm=rowText.match(/(PRIMERA|SEGUNDA)\s+VUELTA/);
+      if(vm){ section++; sections[section]=vm[0]; }
+      const home=clean(r[ix.home]), away=clean(r[ix.away]);
       if(!home||!away) return;
-      const num=i=>{const v=i>=0?String(r[i]||'').trim():'';return v!==''&&!isNaN(v)?Number(v):null;};
+      const num=i=>{const v=i>=0?clean(r[i]):'';return v!==''&&!isNaN(v)?Number(v):null;};
       const hs=num(ix.hs), as=num(ix.as);
       const oargiHome=norm(home).startsWith('oargi');
-      const rawTeam=(ix.team>=0&&r[ix.team])?String(r[ix.team]).trim():'';
+      const rawTeam=ix.team>=0?clean(r[ix.team]):'';
       const team=(rawTeam&&!/VUELTA/i.test(rawTeam)?rawTeam:'')||(oargiHome?home:away);
       let status='pending';
       if(hs!==null&&as!==null){
         status=hs===as?'draw':((hs>as)===oargiHome?'win':'loss');
       }
-      out.push({section,team,liga:ix.liga>=0?(r[ix.liga]||'').trim():'',round:ix.round>=0?(r[ix.round]||'').trim():'',
-        date:parseDate(ix.date>=0?r[ix.date]:''),time:parseTime(ix.time>=0?r[ix.time]:''),home,away,hs,as,status});
+      out.push({section,team,round:ix.round>=0?clean(r[ix.round]):'',
+        date:parseDate(ix.date>=0?r[ix.date]:''),time:parseTime(ix.time>=0?r[ix.time]:''),
+        home,away,hs,as,status});
     });
-    /* dentro de cada vuelta: primero por fecha; los partidos sin fecha van al final de su vuelta */
     const dt=d=>d?d.getTime():Infinity;
     out.sort((a,b)=>(a.section-b.section)||(dt(a.date)>dt(b.date)?1:dt(a.date)<dt(b.date)?-1:0)||a.time.localeCompare(b.time));
     return {matches:out,sections};
@@ -153,8 +157,6 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     shown.forEach(m=>{if(m.status!=='pending'){c.played++;c[m.status]++;}});
     summary.innerHTML=[['results.played',c.played],['results.won',c.win],['results.drawn',c.draw],['results.lost',c.loss]]
       .map(x=>'<div><b>'+x[1]+'</b><span>'+esc(t(x[0]))+'</span></div>').join('');
-    /* Todas las vueltas de la hoja se muestran en orden (PRIMERA arriba, SEGUNDA abajo),
-       aunque todavía no tengan partidos: así la cabecera queda preparada. */
     const groups={};
     shown.forEach(m=>{(groups[m.section]=groups[m.section]||[]).push(m);});
     const allSecs=[...new Set([...Object.keys(sections),...Object.keys(groups)].map(Number))].sort((a,b)=>a-b);
