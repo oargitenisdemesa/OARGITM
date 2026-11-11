@@ -106,7 +106,7 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
   }
   function toMatches(rows){
     // Limpia espacios raros (no separables, invisibles) para que la detección sea fiable
-    const clean=s=>String(s==null?'':s).replace(/[ ​-‍﻿]/g,' ').replace(/\s+/g,' ').trim();
+    const clean=s=>String(s==null?'':s).replace(/[ ​-‍﻿]/g,' ').replace(/\s+/g,' ').trim();
     // Busca la fila de cabecera (la que empieza por "Equipo"), aunque no sea la primera
     const hi=rows.findIndex(r=>norm(clean(r[0])).startsWith('equipo'));
     if(hi<0) return {matches:[],sections:{}};
@@ -120,11 +120,12 @@ const RESULTS_SHEET_TAB=''; // nombre de la pestaña; vacío = primera pestaña
     if(ix.home<0||ix.away<0) return {matches:[],sections:{}};
     const out=[], sections={};
     let section=0;
+    sections[0]='PRIMERA VUELTA'; // el título de primera vuelta siempre aparece al inicio
     rows.slice(hi+1).forEach(r=>{
       // Detección de PRIMERA/SEGUNDA VUELTA en cualquier celda de la fila
       const rowText=clean(r.join(' ')).toUpperCase();
       const vm=rowText.match(/(PRIMERA|SEGUNDA)\s+VUELTA/);
-      if(vm){ section++; sections[section]=vm[0]; }
+      if(vm){ section = vm[1]==='PRIMERA' ? 0 : 1; sections[section]=vm[0]; }
       const home=clean(r[ix.home]), away=clean(r[ix.away]);
       if(!home||!away) return;
       const num=i=>{const v=i>=0?clean(r[i]):'';return v!==''&&!isNaN(v)?Number(v):null;};
